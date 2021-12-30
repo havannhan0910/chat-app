@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "817829414649",
+    "project_id": "canary-chat-22dab",
+    "storage_bucket": "canary-chat-22dab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817829414649:android:b12e1333a91e2044d40428",
+        "android_client_info": {
+          "package_name": "com.example.canary_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817829414649-v09q92puq53jmmj341m7c8gpqfofp5sq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhL3iw7DW0NmXl3I6Z339DwFsM5uxX2b8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817829414649-v09q92puq53jmmj341m7c8gpqfofp5sq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
