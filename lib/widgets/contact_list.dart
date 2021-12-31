@@ -38,7 +38,7 @@ class _ContactListState extends State<ContactList> {
       child:Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: snapshot!.map((data) => _contactListItem(context, data)).toList(),
       ),
     );
