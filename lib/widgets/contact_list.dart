@@ -35,8 +35,17 @@ class _ContactListState extends State<ContactList> {
       physics:
           const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       padding: const EdgeInsets.only(top: 16.0),
+<<<<<<< HEAD
       children:
           snapshot!.map((data) => _contactListItem(context, data)).toList(),
+=======
+      child:Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: snapshot!.map((data) => _contactListItem(context, data)).toList(),
+      ),
+>>>>>>> 0cb9009f5ade49f5ce8d329a957e8a4240f29d06
     );
   }
 
