@@ -15,7 +15,7 @@ class ChatRoom extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ChatRoomState createState() => _ChatRoomState(name, email);
+  _ChatRoomState createState() => _ChatRoomState();
 }
 
 class _ChatRoomState extends State<ChatRoom> {
@@ -23,10 +23,7 @@ class _ChatRoomState extends State<ChatRoom> {
   final _scrollController = ScrollController();
   final _auth = AuthService();
 
-  final String name;
-  final String email;
-
-  _ChatRoomState(this.name, this.email);
+  bool _canSend() => _txtMessage.text.isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +34,11 @@ class _ChatRoomState extends State<ChatRoom> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(name),
-            Text(email, style: const TextStyle(fontSize: 10),)
+            Text(widget.name),
+            Text(
+              widget.email,
+              style: const TextStyle(fontSize: 10),
+            )
           ],
         ),
         backgroundColor: Colors.pinkAccent,
@@ -63,11 +63,21 @@ class _ChatRoomState extends State<ChatRoom> {
                     onSubmitted: (_) {
                       _sendMessage(firestore);
                     },
+                    onChanged: (_) {
+                      setState(() {
+                        _canSend();
+                      });
+                    },
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.send),
+                  icon: Icon(_canSend()
+                      ? Icons.send_rounded
+                      : Icons.cancel_schedule_send_rounded),
                   onPressed: () {
+                    setState(() {
+                      !_canSend();
+                    });
                     _sendMessage(firestore);
                   },
                 )
@@ -80,7 +90,6 @@ class _ChatRoomState extends State<ChatRoom> {
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot snapshot) {
-
     final message = Message.fromSnapshot(snapshot);
 
     return MessageWidget(
@@ -105,21 +114,20 @@ class _ChatRoomState extends State<ChatRoom> {
   }
 
   Conversation _getConversation() {
-    final roomId = roomID(email, _auth.currentEmail()!);
+    final roomId = roomID(widget.email, _auth.currentEmail()!);
 
     return Conversation(
       roomId: roomId,
       sender: _auth.currentName()!,
       senderEmail: _auth.currentEmail()!,
-      receiverEmail: email,
-      receiver: name,
+      receiverEmail: widget.email,
+      receiver: widget.name,
       date: DateTime.now(),
       lastMessage: _txtMessage.text,
     );
   }
 
   Widget _getMessageList(FireStoreService firestore) {
-
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
@@ -139,10 +147,6 @@ class _ChatRoomState extends State<ChatRoom> {
     );
   }
 
-  bool _canSend() {
-    return _txtMessage.text.isNotEmpty;
-  }
-
   void _sendMessage(FireStoreService firestore) {
     String? _currentEmail = _auth.currentEmail();
 
@@ -158,11 +162,11 @@ class _ChatRoomState extends State<ChatRoom> {
     }
   }
 
-  _sendSticker() {}
+  // _sendSticker() {}
 
   void _scrollToBottom() {
     if (_scrollController.hasClients) {
-      _scrollController.jumpTo(_scrollController.position.maxScrollExtent+1);
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent + 1);
     }
   }
 

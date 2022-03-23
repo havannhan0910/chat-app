@@ -16,13 +16,13 @@ class ChatRoomList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: _firestore.addConversation(),
-        builder: (context, snapshot) {
-          return snapshot.hasData
-              ? chatRoomList(context, snapshot.data!.docs)
-              : emptyList();
-        },
-      );
+      stream: _firestore.addConversation(),
+      builder: (context, snapshot) {
+        return snapshot.hasData
+            ? chatRoomList(context, snapshot.data!.docs)
+            : emptyList();
+      },
+    );
   }
 
   Widget emptyList() {
@@ -35,13 +35,12 @@ class ChatRoomList extends StatelessWidget {
   }
 
   Widget chatRoomList(BuildContext context, List<DocumentSnapshot>? snapshot) {
-    return SingleChildScrollView(
+    return ListView(
       controller: _scrollController,
-      physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      physics:
+          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-      child: Column(
-        children: snapshot!.map((data) => chatListItem(context, data)).toList(),
-      ),
+      children: snapshot!.map((data) => chatListItem(context, data)).toList(),
     );
   }
 
@@ -60,15 +59,22 @@ class ChatRoomList extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (_) => ChatRoom(
-                      name: _isSender ? _conversation.sender : _conversation.receiver,
-                      email: _isSender? _conversation.senderEmail : _conversation.receiverEmail,
+                      name: _isSender
+                          ? _conversation.sender
+                          : _conversation.receiver,
+                      email: _isSender
+                          ? _conversation.senderEmail
+                          : _conversation.receiverEmail,
                     )));
       },
-      child: !_inConversation ? Container() : ConversationWidget(
-        receiver: _isSender ? _conversation.sender : _conversation.receiver,
-        dateTime: _conversation.date,
-        text: _conversation.lastMessage,
-      ),
+      child: !_inConversation
+          ? Container()
+          : ConversationWidget(
+              receiver:
+                  _isSender ? _conversation.sender : _conversation.receiver,
+              dateTime: _conversation.date,
+              text: _conversation.lastMessage,
+            ),
     );
   }
 }

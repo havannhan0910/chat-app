@@ -1,10 +1,6 @@
-import 'package:canary_chat/screens/main_screen/chat_screen.dart';
 import 'package:canary_chat/services/firestore_service.dart';
-import 'package:canary_chat/widgets/chat_room_list.dart';
-import 'package:canary_chat/widgets/contact_list.dart';
 import 'package:canary_chat/widgets/search_list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchWidget extends StatefulWidget {

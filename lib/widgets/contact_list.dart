@@ -29,17 +29,14 @@ class _ContactListState extends State<ContactList> {
   }
 
   Widget _contactList(BuildContext context, List<DocumentSnapshot>? snapshot) {
-    return SingleChildScrollView(
+    return ListView(
       scrollDirection: Axis.horizontal,
       controller: _scrollController,
       physics:
           const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       padding: const EdgeInsets.only(top: 16.0),
-      child:Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: snapshot!.map((data) => _contactListItem(context, data)).toList(),
-      ),
+      children:
+          snapshot!.map((data) => _contactListItem(context, data)).toList(),
     );
   }
 
@@ -58,7 +55,7 @@ class _ContactListState extends State<ContactList> {
             MaterialPageRoute(
                 builder: (_) => ChatRoom(name: name, email: email)));
       },
-      child: Padding(
+      child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
           children: [

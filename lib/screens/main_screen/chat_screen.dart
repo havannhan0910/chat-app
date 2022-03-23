@@ -1,7 +1,6 @@
 import 'package:canary_chat/widgets/search_widget.dart';
 import 'package:canary_chat/widgets/chat_room_list.dart';
 import 'package:canary_chat/widgets/contact_list.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -33,13 +32,11 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const ContactList(),
-            ChatRoomList(),
-          ],
-        ),
+      body: Column(
+        children: [
+          const Flexible(flex: 1, child: ContactList()),
+          Flexible(flex: 5, child: ChatRoomList()),
+        ],
       ),
     );
   }

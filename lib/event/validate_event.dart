@@ -1,6 +1,4 @@
-import 'package:canary_chat/base/base_event.dart';
-
-class ValidateEvent extends BaseEvent {
+class ValidateEvent {
 
   String? user;
   String? pass;
