@@ -2,6 +2,7 @@ import 'package:canary_chat/models/conversation.dart';
 import 'package:canary_chat/models/message.dart';
 import 'package:canary_chat/services/auth_service.dart';
 import 'package:canary_chat/services/firestore_service.dart';
+import 'package:canary_chat/services/notifications.dart';
 import 'package:canary_chat/widgets/message_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,13 @@ class _ChatRoomState extends State<ChatRoom> {
   final _auth = AuthService();
 
   bool _canSend() => _txtMessage.text.isNotEmpty;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    NotificationsAPI.init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +85,10 @@ class _ChatRoomState extends State<ChatRoom> {
                   onPressed: () {
                     setState(() {
                       !_canSend();
+                      NotificationsAPI.display(
+                        title: _auth.currentName(),
+                        body: _txtMessage.text,
+                      );
                     });
                     _sendMessage(firestore);
                   },

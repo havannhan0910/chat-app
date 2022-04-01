@@ -2,6 +2,7 @@ import 'package:canary_chat/screens/home_page.dart';
 import 'package:canary_chat/screens/login_screen.dart';
 import 'package:canary_chat/services/auth_service.dart';
 import 'package:canary_chat/services/firestore_service.dart';
+import 'package:canary_chat/services/notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

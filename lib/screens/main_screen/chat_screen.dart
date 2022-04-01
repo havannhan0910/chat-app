@@ -34,8 +34,14 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Column(
         children: [
-          const Flexible(flex: 1, child: ContactList()),
-          Flexible(flex: 5, child: ChatRoomList()),
+          const Flexible(
+            flex: 1,
+            child: ContactList(),
+          ),
+          Flexible(
+            flex: 5,
+            child: ChatRoomList(),
+          ),
         ],
       ),
     );
